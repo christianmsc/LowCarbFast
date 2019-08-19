@@ -11,7 +11,8 @@ const app = express();
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({extended: false}));
 // Alimento.create({ nome: 'Torresmo', tipo: 'Carne', porcao: '100', un_porcao: 'gramas', carboidratos: '0', un_carboidratos: 'gramas', proteinas: '61', un_proteinas: '1' });
-// app.use(cors);
+app.use(cors());
+app.options('*', cors());
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
