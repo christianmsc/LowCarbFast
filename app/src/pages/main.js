@@ -8,6 +8,10 @@ export default class Main extends Component {
         title: "Low Carb Fast"
     };
 
+    state = {
+        alimentos: []
+    };
+
     componentDidMount() {
         this.listarAlimentos();
     }
@@ -15,9 +19,8 @@ export default class Main extends Component {
     listarAlimentos = async () => {
         try {
             const response = await api.get("/alimentos");
-            console.log(response.data);
-            // const { docs } = response.data;
-            // console.log(docs);
+            const alimentos = response.data;
+            this.setState({alimentos: alimentos});
         } catch (error) {
             console.log(error);
           }
@@ -27,7 +30,12 @@ export default class Main extends Component {
     render(){
         return (
             <View>
-                <Text>Testando Main</Text>
+                <Text>Alimentos:</Text>
+                {this.state.alimentos.map(alimento => {
+                    return (
+                        <Text key={alimento.id}>{alimento.nome}</Text>
+                    );
+                })}
             </View>
         );
     }
